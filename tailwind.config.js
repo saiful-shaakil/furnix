@@ -7,8 +7,17 @@ module.exports = {
     // Or if using `src` directory:
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  colors: {
+    primary: "#3e976b",
+    secondary: "#bdefd7",
+  },
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        pacifico: [`var(--font-pacifico)`],
+        rubik: [`var(--font-rubik)`],
+      },
+    },
   },
   plugins: [],
 };
