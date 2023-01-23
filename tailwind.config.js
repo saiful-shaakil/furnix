@@ -7,15 +7,15 @@ module.exports = {
     // Or if using `src` directory:
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
-  colors: {
-    primary: "#3e976b",
-    secondary: "#bdefd7",
-  },
   theme: {
     extend: {
       fontFamily: {
         pacifico: [`var(--font-pacifico)`],
         rubik: [`var(--font-rubik)`],
+      },
+      colors: {
+        primary: "#3e976b",
+        secondary: "#bdefd7",
       },
     },
   },

@@ -14,7 +14,7 @@ const rubik = Rubik({
 
 function MyApp({ Component, pageProps }) {
   return (
-    <main className={`${pacifico.variable} ${rubik.variable}`}>
+    <main className={`${pacifico.variable} ${rubik.variable} font-rubik`}>
       <Component {...pageProps} />
     </main>
   );
