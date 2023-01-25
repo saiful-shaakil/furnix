@@ -1,7 +1,9 @@
 import Head from "next/head";
+import Image from "next/image";
 import Navbar from "../src/components/Navbar";
 import Banner from "../src/sections/homepage/Banner";
-import VariableWidthSlick from "../src/sections/homepage/variableWidthSlick";
+import Slider from "../src/sections/homepage/slider";
+import mattress from "../public/assets/mattres.webp";
 
 function Home() {
   return (
@@ -24,7 +26,7 @@ function Home() {
         <Banner />
       </div>
       {/* second section: variable width slick slider */}
-      <VariableWidthSlick />
+      <Slider />
     </div>
   );
 }
