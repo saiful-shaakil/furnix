@@ -4,7 +4,7 @@ import { BiCart } from "react-icons/bi";
 
 function Navbar() {
   return (
-    <div className="grid grid-cols-3 m-auto w-[90%] py-10 items-center">
+    <div className="grid grid-cols-3 m-auto w-[80%] py-10 items-center">
       <div>
         <h1 className="font-pacifico text-4xl cursor-pointer pb-4">Furnix</h1>
       </div>
