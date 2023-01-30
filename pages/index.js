@@ -16,10 +16,8 @@ import dresser from "../src/assets/dresser.webp";
 import sofa from "../src/assets/sofa.webp";
 import mattress from "../src/assets/mattres.webp";
 import ottomanchairbanner from "../src/assets/banner2.webp";
-import bathroomfittings from "../src/assets/bathroomfittings.webp";
-import homedecor from "../src/assets/homedecor.webp";
-import dinningchair from "../src/assets/dinningchair.webp";
 import BannerCard from "../src/components/BannerCard";
+import Products from "../src/sections/OurProducts/products";
 
 function Home() {
   return (
@@ -161,7 +159,7 @@ function Home() {
                 </p>
               </div>
               <Image
-                className="lg:ml-32"
+                className="lg:ml-32 w-auto"
                 src={ottomanchairbanner}
                 height={400}
                 width={400}
@@ -187,6 +185,11 @@ function Home() {
               type="b"
             />
           </div>
+        </section>
+        {/* fourth section: products */}
+        <section className="common-width my-20">
+          <h1 className="text-center text-5xl">Our Products</h1>
+          <Products />
         </section>
       </main>
     </>

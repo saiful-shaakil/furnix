@@ -19,3 +19,9 @@ a {
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .common-width {
+    @apply w-[80%] m-auto;
+  }
+}
