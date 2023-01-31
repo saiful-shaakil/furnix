@@ -15,11 +15,17 @@ export default function Product({ product }) {
     >
       {hover && (
         <>
-          <div className="absolute right-1 top-16 gap-y-3  flex flex-col">
-            <MdOutlinePostAdd className="text-2xl bg-white px-2 py-2 w-auto h-auto rounded-full" />
-            <AiOutlineSearch className="text-2xl bg-white px-2 py-2 w-auto h-auto rounded-full" />
-            <AiOutlineHeart className="text-2xl bg-white px-2 py-2 w-auto h-auto rounded-full" />
-          </div>
+          {items !== 0 ? (
+            <div className="absolute right-1 top-16 gap-y-3  flex flex-col">
+              <MdOutlinePostAdd className="text-2xl bg-white px-2 py-2 w-auto h-auto rounded-full" />
+              <AiOutlineSearch className="text-2xl bg-white px-2 py-2 w-auto h-auto rounded-full" />
+              <AiOutlineHeart className="text-2xl bg-white px-2 py-2 w-auto h-auto rounded-full" />
+            </div>
+          ) : (
+            <div className="absolute bg-secondary w-full text-center text-4xl font-bold ">
+              Sold Out
+            </div>
+          )}
         </>
       )}
       <img

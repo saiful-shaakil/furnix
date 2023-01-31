@@ -1,5 +1,6 @@
 import "../styles/globals.css";
 import { Pacifico, Rubik } from "@next/font/google";
+import Footer from "../src/components/Footer";
 
 const pacifico = Pacifico({
   subsets: ["latin"],
@@ -16,6 +17,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <main className={`${pacifico.variable} ${rubik.variable} font-rubik`}>
       <Component {...pageProps} />
+      <Footer />
     </main>
   );
 }
