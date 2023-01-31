@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
     <footer class="bg-white pt-4 pb-8 xl:pt-8">
-      <div class="max-w-screen-lg px-4 mx-auto text-gray-400 xl:max-w-screen-xl sm:px-6 md:px-8 ">
+      <div class="common-width px-4 mx-auto text-gray-400  sm:px-6 md:px-8 ">
         <ul class="flex flex-wrap justify-center pb-8 text-lg font-light">
           <li class="w-1/2 md:w-1/3 lg:w-1/3">
             <div class="text-center">

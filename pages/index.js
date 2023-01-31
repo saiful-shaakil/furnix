@@ -1,6 +1,5 @@
 import Head from "next/head";
 import Image from "next/image";
-import Navbar from "../src/components/Navbar";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper";
 import "swiper/css";
@@ -18,6 +17,7 @@ import mattress from "../src/assets/mattres.webp";
 import ottomanchairbanner from "../src/assets/banner2.webp";
 import BannerCard from "../src/components/BannerCard";
 import Products from "../src/sections/OurProducts/products";
+import Navbar from "../src/components/Navbar/Navbar";
 
 function Home() {
   return (
@@ -42,7 +42,9 @@ function Home() {
           {/* Banner Text */}
           <div className="flex flex-col justify-center items-center pt-5">
             <h1 className="text-primary/50 text-2xl">WELCOME TO FURNIX</h1>
-            <h1 className="text-primary text-6xl pt-4">Art with an attitude</h1>
+            <h1 className="text-primary text-4xl lg:text-6xl pt-4">
+              Art with an attitude
+            </h1>
             <button className="bg-secondary px-3 py-2 rounded-full hover:bg-primary mt-7 font-bold">
               Discover Now
             </button>
@@ -148,7 +150,7 @@ function Home() {
         <section className="w-[80%] relative m-auto flex flex-col lg:flex-row gap-5 my-10">
           <div className="flex-[0.5] gap-12 flex flex-col">
             <div className="h-[570px] ">
-              <div className="mt-5 w-80 ml-20">
+              <div className="mt-5 w-80 md:ml-20">
                 <h1 className="text-5xl text-primary mb-10">
                   Furnishing <br /> Your Dreams
                 </h1>

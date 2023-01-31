@@ -1,6 +1,7 @@
 import "../styles/globals.css";
 import { Pacifico, Rubik } from "@next/font/google";
 import Footer from "../src/components/Footer";
+// import Navbarr from "../src/components/Navbarr";
 
 const pacifico = Pacifico({
   subsets: ["latin"],
