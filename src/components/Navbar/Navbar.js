@@ -1,29 +1,49 @@
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import NavLinks from "./NavLinks";
-import { AiOutlineMenu, AiOutlineBell, AiOutlineSearch } from "react-icons/ai";
+import { AiOutlineMenu, AiOutlineSearch } from "react-icons/ai";
+import { MdManageAccounts } from "react-icons/md";
+import { BiCart } from "react-icons/bi";
 import { HiOutlineXMark } from "react-icons/hi2";
 const Navbar = () => {
   const [open, setOpen] = useState(false);
+  const [isScrolling, setIsScrolling] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setIsScrolling(true);
+      } else {
+        setIsScrolling(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
   return (
-    <nav className="bg-white z-10">
+    <nav className={`z-10 w-full ${isScrolling ? "bg-white fixed" : "sticky"}`}>
       <div className="flex items-center font-medium justify-around">
         <div className="p-5 md:w-auto w-full flex justify-between">
           <h1 className="font-pacifico text-4xl cursor-pointer pb-4">Furnix</h1>
           <div className="text-3xl md:hidden" onClick={() => setOpen(!open)}>
-            {open ? <HiOutlineXMark /> : <AiOutlineMenu />}
+            {open ? (
+              <HiOutlineXMark className="cursor-pointer" />
+            ) : (
+              <AiOutlineMenu className="cursor-pointer" />
+            )}
           </div>
         </div>
-        <ul className="md:flex hidden uppercase items-center gap-8 font-[Poppins]">
-          <li>
-            <Link href="/" className="py-7 px-3 inline-block">
-              Home
-            </Link>
-          </li>
+        <ul className="md:flex hidden uppercase items-center gap-8">
           <NavLinks />
         </ul>
-        <div className="md:block hidden">
-          {/* <Button /> */} <p>Button</p>
+        <div className="md:flex justify-end text-3xl gap-5 hidden">
+          <AiOutlineSearch className="cursor-pointer" />
+          <MdManageAccounts className="cursor-pointer" />
+          <BiCart className="cursor-pointer" />
         </div>
         {/* Mobile nav */}
         <ul
@@ -37,7 +57,11 @@ const Navbar = () => {
               Furnix
             </h1>
             <div className="text-3xl md:hidden" onClick={() => setOpen(!open)}>
-              {open ? <HiOutlineXMark /> : <AiOutlineMenu />}
+              {open ? (
+                <HiOutlineXMark className="cursor-pointer" />
+              ) : (
+                <AiOutlineMenu className="cursor-pointer" />
+              )}
             </div>
           </li>
           <NavLinks />
