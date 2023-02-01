@@ -1,7 +1,8 @@
 import "../styles/globals.css";
 import { Pacifico, Rubik } from "@next/font/google";
 import Footer from "../src/components/Footer";
-// import Navbarr from "../src/components/Navbarr";
+import Navbar from "../src/components/Navbar/Navbar";
+import { useRouter } from "next/router";
 
 const pacifico = Pacifico({
   subsets: ["latin"],
@@ -15,12 +16,24 @@ const rubik = Rubik({
 });
 
 function MyApp({ Component, pageProps }) {
-  return (
-    <main className={`${pacifico.variable} ${rubik.variable} font-rubik`}>
-      <Component {...pageProps} />
-      <Footer />
-    </main>
-  );
+  const router = useRouter();
+  const { pathname } = router;
+  if (pathname == "/") {
+    return (
+      <main className={`${pacifico.variable} ${rubik.variable} font-rubik`}>
+        <Component {...pageProps} />
+        <Footer />
+      </main>
+    );
+  } else {
+    return (
+      <main className={`${pacifico.variable} ${rubik.variable} font-rubik`}>
+        <Navbar />
+        <Component {...pageProps} />
+        <Footer />
+      </main>
+    );
+  }
 }
 
 export default MyApp;

@@ -24,4 +24,7 @@ a {
   .common-width {
     @apply w-[80%] m-auto;
   }
+  .flex-class {
+    @apply flex justify-center items-center;
+  }
 }

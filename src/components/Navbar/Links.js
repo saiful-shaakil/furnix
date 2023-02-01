@@ -1,11 +1,13 @@
 export const links = [
   {
     name: "Home",
+    link: "/",
     submenu: false,
     sublinks: [],
   },
   {
     name: "Shop",
+    link: "/products",
     submenu: false,
     sublinks: [],
   },
@@ -47,6 +49,7 @@ export const links = [
   },
   {
     name: "Help",
+    link: "/help",
     submenu: false,
     sublinks: [],
   },

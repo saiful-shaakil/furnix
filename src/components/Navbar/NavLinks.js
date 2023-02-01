@@ -18,7 +18,11 @@ const NavLinks = () => {
                 setSubHeading("");
               }}
             >
-              {link.name}
+              {link.link ? (
+                <Link href={link.link}>{link.name}</Link>
+              ) : (
+                <>{link.name}</>
+              )}
               {link.submenu && (
                 <>
                   {" "}
@@ -43,7 +47,7 @@ const NavLinks = () => {
                   </div>
                   <div className="bg-white p-5 grid grid-cols-3 gap-10">
                     {link.sublinks.map((sublink) => (
-                      <div key={sublink.name}>
+                      <div key={sublink.Head}>
                         <h1 className="text-lg font-semibold">
                           {sublink.Head}
                         </h1>
@@ -97,7 +101,7 @@ const NavLinks = () => {
                     }`}
                   >
                     {slinks.sublink.map((slink) => (
-                      <li key={slink.link} className="py-3 pl-14">
+                      <li key={slink.name} className="py-3 pl-14">
                         <Link href={slink.link}>{slink.name}</Link>
                       </li>
                     ))}
