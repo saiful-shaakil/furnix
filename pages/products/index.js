@@ -1,6 +1,10 @@
 import Head from "next/head";
 import bannerShop from "../../src/assets/banner-shop.webp";
+import Product from "../../src/sections/OurProducts/Product";
+import GetData from "../../src/utils/dataFetcher";
 export default function Products() {
+  const api = "products.json";
+  const [data, error, loading] = GetData(api, "allProducts");
   return (
     <div>
       <Head>
@@ -29,7 +33,7 @@ export default function Products() {
       </section>
       {/* second section: products and filter */}
       <section className="flex common-width my-20">
-        <div className="flex-[0.25]">
+        <div className="flex-[0.25] hidden sm:block">
           <div>
             <h1 className="text-xl mb-4">Categories</h1>{" "}
             <ul className="flex flex-col gap-y-3 text-gray-400">
@@ -50,11 +54,34 @@ export default function Products() {
               <li className="cursor-pointer">&150-$500</li>
             </ul>
           </div>
+          {/* third filter option */}
+          <div className="mt-20 ">
+            <h1 className="text-xl mb-4">Sort By</h1>{" "}
+            <ul className="flex flex-col gap-y-3 text-gray-400">
+              <li className="cursor-pointer">High to Low Price</li>
+              <li className="cursor-pointer">Low to High Price</li>
+              <li className="cursor-pointer">A to Z</li>
+              <li className="cursor-pointer">Z to A</li>
+            </ul>
+          </div>
         </div>
         {/* Products */}
-        <div className="flex-[0.75]">
-          <div>Sort</div>
-          <div>AllProducts</div>
+        <div className="flex-1 sm:flex-[0.75]">
+          <div className="flex justify-between items-center mb-10">
+            <div>
+              <select name="Sort" id="" className="focus:outline-none">
+                <option value="All Products">All Products</option>
+                <option value="Best Selling">Best Selling</option>
+                <option value="New Arrivals">New Arrivals</option>
+              </select>
+            </div>
+            <div>Filter</div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 place-items-center sm:place-items-stretch">
+            {data?.map((product) => (
+              <Product key={product.id} product={product} />
+            ))}
+          </div>
         </div>
       </section>
     </div>

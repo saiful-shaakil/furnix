@@ -5,8 +5,8 @@ import useSWR from "swr";
 //   return data;
 // };
 
-const GetData = (api) => {
-  const { data, error, loading } = useSWR("allproducts", async () => {
+const GetData = (api, name) => {
+  const { data, error, loading } = useSWR(`${name}`, async () => {
     const response = await fetch(`${api}`);
     const data = await response.json();
     return data;
