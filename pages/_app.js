@@ -3,6 +3,8 @@ import { Pacifico, Rubik } from "@next/font/google";
 import Footer from "../src/components/Footer";
 import Navbar from "../src/components/Navbar/Navbar";
 import { useRouter } from "next/router";
+import { Provider } from "react-redux";
+import { wrapper } from "../src/redux/app/store";
 
 const pacifico = Pacifico({
   subsets: ["latin"],
@@ -15,23 +17,29 @@ const rubik = Rubik({
   weight: ["400"],
 });
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, ...rest }) {
+  const { store, props } = wrapper.useWrappedStore(rest);
+  const { pageProps } = props;
   const router = useRouter();
   const { pathname } = router;
   if (pathname == "/") {
     return (
-      <main className={`${pacifico.variable} ${rubik.variable} font-rubik`}>
-        <Component {...pageProps} />
-        <Footer />
-      </main>
+      <Provider store={store}>
+        <main className={`${pacifico.variable} ${rubik.variable} font-rubik`}>
+          <Component {...pageProps} />
+          <Footer />
+        </main>
+      </Provider>
     );
   } else {
     return (
-      <main className={`${pacifico.variable} ${rubik.variable} font-rubik`}>
-        <Navbar />
-        <Component {...pageProps} />
-        <Footer />
-      </main>
+      <Provider store={store}>
+        <main className={`${pacifico.variable} ${rubik.variable} font-rubik`}>
+          <Navbar />
+          <Component {...pageProps} />
+          <Footer />
+        </main>
+      </Provider>
     );
   }
 }
