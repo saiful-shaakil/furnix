@@ -5,7 +5,9 @@ import { AiOutlineMenu, AiOutlineSearch } from "react-icons/ai";
 import { MdManageAccounts } from "react-icons/md";
 import { BiCart } from "react-icons/bi";
 import { HiOutlineXMark } from "react-icons/hi2";
+import { useSelector } from "react-redux";
 const Navbar = () => {
+  const cart = useSelector((state) => state.cart);
   const [open, setOpen] = useState(false);
   const [isScrolling, setIsScrolling] = useState(false);
 
@@ -43,7 +45,16 @@ const Navbar = () => {
         <div className="md:flex justify-end text-3xl gap-5 hidden">
           <AiOutlineSearch className="cursor-pointer" />
           <MdManageAccounts className="cursor-pointer" />
-          <BiCart className="cursor-pointer" />
+          <div className="relative">
+            <span
+              className={`absolute text-[18px] -mt-5 ${
+                cart.totalProduct < 10 ? "right-2" : "right-1"
+              }`}
+            >
+              {cart.totalProduct}
+            </span>
+            <BiCart className="cursor-pointer" />
+          </div>
         </div>
         {/* Mobile nav */}
         <ul
