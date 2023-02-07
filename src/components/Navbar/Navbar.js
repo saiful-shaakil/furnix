@@ -5,10 +5,12 @@ import { AiOutlineMenu, AiOutlineSearch } from "react-icons/ai";
 import { MdManageAccounts } from "react-icons/md";
 import { BiCart } from "react-icons/bi";
 import { HiOutlineXMark } from "react-icons/hi2";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { showCart } from "../../redux/features/cart/cartSlice";
 const Navbar = () => {
   const cart = useSelector((state) => state.cart);
   const [open, setOpen] = useState(false);
+  const dispatch = useDispatch();
   const [isScrolling, setIsScrolling] = useState(false);
 
   useEffect(() => {
@@ -26,6 +28,11 @@ const Navbar = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  // to show cart
+  const displayCart = () => {
+    dispatch(showCart(true));
+  };
   return (
     <nav className={`z-10 w-full ${isScrolling ? "bg-white fixed" : "sticky"}`}>
       <div className="flex items-center font-medium justify-around">
@@ -46,14 +53,16 @@ const Navbar = () => {
           <AiOutlineSearch className="cursor-pointer" />
           <MdManageAccounts className="cursor-pointer" />
           <div className="relative">
-            <span
-              className={`absolute text-[18px] -mt-5 ${
-                cart.totalProduct < 10 ? "right-2" : "right-1"
-              }`}
-            >
-              {cart.totalProduct}
+            <span className="cursor-pointer" onClick={() => displayCart()}>
+              <span
+                className={`absolute text-[18px] -mt-5 ${
+                  cart.totalProduct < 10 ? "right-2" : "right-1"
+                }`}
+              >
+                {cart.totalProduct}
+              </span>
+              <BiCart className="cursor-pointer" />
             </span>
-            <BiCart className="cursor-pointer" />
           </div>
         </div>
         {/* Mobile nav */}

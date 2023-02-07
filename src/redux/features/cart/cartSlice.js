@@ -37,11 +37,13 @@ const cartSlice = createSlice({
       }
     },
     removeItemFromCart: (state, action) => {},
-    increaseItemInCart: (state, action) => {},
+    increaseItemInCart: (state, action) => {
+      console.log(action);
+    },
     decreaseItemInCart: (state, action) => {},
     calculateTotalInCart: (state) => {},
-    displayCart: (state, action) => {
-      state.showCart = action.status;
+    showCart: (state, action) => {
+      state.showCart = action.payload;
     },
   },
 });
@@ -53,7 +55,7 @@ export const {
   calculateTotalInCart,
   increaseItemInCart,
   decreaseItemInCart,
-  displayCart,
+  showCart,
 } = cartSlice.actions;
 
 export default cartSlice.reducer;

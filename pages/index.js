@@ -18,8 +18,11 @@ import ottomanchairbanner from "../src/assets/banner2.webp";
 import BannerCard from "../src/components/BannerCard";
 import Products from "../src/sections/OurProducts/products";
 import Navbar from "../src/components/Navbar/Navbar";
+import { useSelector } from "react-redux";
+import CartSidebar from "../src/components/Cart";
 
 function Home() {
+  const { showCart } = useSelector((state) => state.cart);
   return (
     <>
       <Head>
@@ -27,6 +30,7 @@ function Home() {
         <meta property="description" content="Homepage" />
       </Head>
       <main>
+        {showCart && <CartSidebar />}
         {/* First section of home page */}
         <section
           style={{

@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "Title": "OTTOMAN CHAIR",
+    "name": "OTTOMAN CHAIR",
     "money": 110,
     "img": [
       "https://i.ibb.co/ggf2nCV/ottoman-chair.webp",
@@ -14,7 +14,7 @@
   },
   {
     "id": 2,
-    "Title": "TAKATA LEMNOS CLOCK",
+    "name": "TAKATA LEMNOS CLOCK",
     "money": 90,
     "img": [
       "https://i.ibb.co/r0qdbT3/clock1.webp",
@@ -26,7 +26,7 @@
   },
   {
     "id": 3,
-    "Title": "KIME TEA CADDY",
+    "name": "KIME TEA CADDY",
     "money": 80,
     "img": [
       "https://i.ibb.co/TYjdg01/teadcaddy1.webp",
@@ -38,7 +38,7 @@
   },
   {
     "id": 4,
-    "Title": "MINAMO VASE SET",
+    "name": "MINAMO VASE SET",
     "money": 100,
     "img": [
       "https://i.ibb.co/bJxt4Ty/vaseset.webp",
@@ -50,7 +50,7 @@
   },
   {
     "id": 5,
-    "Title": "WALLNUT WALL CLOCK",
+    "name": "WALLNUT WALL CLOCK",
     "money": 150,
     "img": [
       "https://i.ibb.co/z8qnrMz/wclock1.webp",
@@ -62,7 +62,7 @@
   },
   {
     "id": 6,
-    "Title": "KIME CHAIR",
+    "name": "KIME CHAIR",
     "money": 180,
     "img": [
       "https://i.ibb.co/yf0ZTp1/chair1.webp",
@@ -75,7 +75,7 @@
   },
   {
     "id": 7,
-    "Title": "HORRISON TABLE",
+    "name": "HORRISON TABLE",
     "money": 280,
     "img": [
       "https://i.ibb.co/7JJsT0j/hossirontable.webp",
@@ -88,7 +88,7 @@
   },
   {
     "id": 8,
-    "Title": "EARPHONE CASE",
+    "name": "EARPHONE CASE",
     "money": 50,
     "img": [
       "https://i.ibb.co/bgjvs4p/earphonecase.webp",
