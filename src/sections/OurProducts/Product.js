@@ -11,9 +11,9 @@ import {
 export default function Product({ product }) {
   const [hover, setHover] = useState(false);
   const dispatch = useDispatch();
-  const { Title, img, money, items } = product;
+  const { name, img, money, items } = product;
   // to add item to cart
-  const addItem = () => {
+  const addItem = (product) => {
     dispatch(addItemToCart(product));
   };
   return (
@@ -27,7 +27,7 @@ export default function Product({ product }) {
           {items !== 0 ? (
             <div className="absolute right-1 top-16 gap-y-3  flex flex-col">
               <MdOutlinePostAdd
-                onClick={() => addItem()}
+                onClick={() => addItem(product)}
                 className="text-2xl bg-white px-2 py-2 w-auto h-auto rounded-full"
               />
               <AiOutlineSearch className="text-2xl bg-white px-2 py-2 w-auto h-auto rounded-full" />
@@ -48,7 +48,7 @@ export default function Product({ product }) {
         alt="Product Photo"
       />
       <div className="flex flex-col gap-y-2 justify-center items-center mt-2">
-        <p className="text-black/50 text-xl">{Title}</p>
+        <p className="text-black/50 text-xl">{name}</p>
         <p className="font-bold">${money}</p>
         <p>⭐⭐⭐⭐⭐</p>
       </div>

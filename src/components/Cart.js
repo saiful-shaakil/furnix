@@ -10,6 +10,7 @@ export default function CartSidebar() {
   };
   // to increase the amount of item.
   const increaseQuantity = (id) => {
+    // console.log(id);
     dispatch(increaseItemInCart(id));
   };
   // to decrease the amount of item.
@@ -71,67 +72,65 @@ export default function CartSidebar() {
                         className="-my-6 divide-y divide-gray-200"
                       >
                         {cartItems?.map((item) => (
-                          <>
-                            <li key={item.id} className="flex py-6">
-                              <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                                <img
-                                  src={`${item.img[0]}`}
-                                  alt=""
-                                  className="h-full w-full object-cover object-center"
-                                />
-                              </div>
+                          <li key={item.id} className="flex py-6">
+                            <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
+                              <img
+                                src={`${item.img[0]}`}
+                                alt=""
+                                className="h-full w-full object-cover object-center"
+                              />
+                            </div>
 
-                              <div className="ml-4 flex flex-1 flex-col">
-                                <div>
-                                  <div className="flex justify-between text-base font-medium text-gray-900">
-                                    <h3>
-                                      <a href="#">{item.name}</a>
-                                    </h3>
-                                    <p className="ml-4">${item.money}</p>
-                                  </div>
-                                </div>
-                                <div className="flex flex-1 items-end justify-between text-sm">
-                                  <div className="space-y-1">
-                                    <p className="text-sm dark:text-gray-400">
-                                      <div className="border rounded-lg px-2 py-1">
-                                        <button
-                                          onClick={() =>
-                                            decreaseQuantity(item.id)
-                                          }
-                                          className="text-xl text-primary"
-                                        >
-                                          -
-                                        </button>
-                                        <input
-                                          className="text-black  text-center w-12 mx-2"
-                                          value={item.amount}
-                                          type="text"
-                                          id="quantityValue"
-                                        />
-                                        <button
-                                          onClick={() =>
-                                            increaseQuantity(item.id)
-                                          }
-                                          className="text-xl text-success"
-                                        >
-                                          +
-                                        </button>
-                                      </div>
-                                    </p>
-                                  </div>
-
-                                  <div className="flex">
-                                    <button
-                                      type="button"
-                                      className="font-medium text-indigo-600 hover:text-indigo-500"
-                                    >
-                                      Remove
-                                    </button>
-                                  </div>
+                            <div className="ml-4 flex flex-1 flex-col">
+                              <div>
+                                <div className="flex justify-between text-base font-medium text-gray-900">
+                                  <h3>
+                                    <a href="#">{item.name}</a>
+                                  </h3>
+                                  <p className="ml-4">${item.money}</p>
                                 </div>
                               </div>
-                            </li>
-                          </>
+                              <div className="flex flex-1 items-end justify-between text-sm">
+                                <div className="space-y-1">
+                                  <div className="text-sm dark:text-gray-400">
+                                    <div className="border rounded-lg px-2 py-1">
+                                      <button
+                                        onClick={() =>
+                                          decreaseQuantity(item.id)
+                                        }
+                                        className="text-xl text-primary"
+                                      >
+                                        -
+                                      </button>
+                                      <input
+                                        className="text-black  text-center w-12 mx-2"
+                                        defaultValue={item.amount}
+                                        type="text"
+                                        id="quantityValue"
+                                      />
+                                      <button
+                                        onClick={() =>
+                                          increaseQuantity(item.id)
+                                        }
+                                        className="text-xl text-success"
+                                      >
+                                        +
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div className="flex">
+                                  <button
+                                    type="button"
+                                    className="font-medium text-indigo-600 hover:text-indigo-500"
+                                  >
+                                    Remove
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          </li>
                         ))}
                       </ul>
                     </div>
@@ -140,12 +139,19 @@ export default function CartSidebar() {
 
                 <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
                   <div className="flex justify-between text-base font-medium text-gray-900">
-                    <p>Subtotal</p>
-                    <p>$262.00</p>
+                    <div>
+                      <p>Subtotal</p>
+                    </div>
+                    <div>
+                      <p>$262.00</p>
+                    </div>
                   </div>
-                  <p className="mt-0.5 text-sm text-gray-500">
-                    Shipping and taxes calculated at checkout.
-                  </p>
+                  <div>
+                    {" "}
+                    <p className="mt-0.5 text-sm text-gray-500">
+                      Shipping and taxes calculated at checkout.
+                    </p>
+                  </div>
                   <div className="mt-6">
                     <a
                       href="#"
