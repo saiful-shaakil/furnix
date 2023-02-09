@@ -7,7 +7,9 @@ import {
 } from "../redux/features/cart/cartSlice";
 
 export default function CartSidebar() {
-  const { cartItems } = useSelector((state) => state.cart);
+  const { cartItems, totalProduct, totalPrice } = useSelector(
+    (state) => state.cart
+  );
   const dispatch = useDispatch();
   // to hide the cart
   const hideCart = () => {
@@ -153,13 +155,13 @@ export default function CartSidebar() {
                       <p>Subtotal</p>
                     </div>
                     <div>
-                      <p>$262.00</p>
+                      <p>${totalPrice}</p>
                     </div>
                   </div>
                   <div>
                     {" "}
                     <p className="mt-0.5 text-sm text-gray-500">
-                      Shipping and taxes calculated at checkout.
+                      Shipping and taxes will be calculated at checkout.
                     </p>
                   </div>
                   <div className="mt-6">
@@ -172,13 +174,14 @@ export default function CartSidebar() {
                   </div>
                   <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
                     <p>
-                      or
                       <button
                         type="button"
                         className="font-medium text-indigo-600 hover:text-indigo-500"
                       >
+                        <span className="-rotate-180" aria-hidden="true">
+                          &rarr;
+                        </span>
                         Continue Shopping
-                        <span aria-hidden="true"> &rarr;</span>
                       </button>
                     </p>
                   </div>

@@ -5,7 +5,11 @@ import { MdManageAccounts } from "react-icons/md";
 import { BiCart } from "react-icons/bi";
 import { HiOutlineXMark } from "react-icons/hi2";
 import { useDispatch, useSelector } from "react-redux";
-import { showCart } from "../../redux/features/cart/cartSlice";
+import {
+  calculateTotalInCart,
+  showCart,
+} from "../../redux/features/cart/cartSlice";
+import CartSidebar from "../Cart";
 const Navbar = () => {
   const cart = useSelector((state) => state.cart);
   const [open, setOpen] = useState(false);
@@ -20,13 +24,13 @@ const Navbar = () => {
         setIsScrolling(false);
       }
     };
-
+    dispatch(calculateTotalInCart());
     window.addEventListener("scroll", handleScroll);
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [dispatch, cart?.cartItems]);
 
   // to show cart
   const displayCart = () => {
@@ -34,6 +38,7 @@ const Navbar = () => {
   };
   return (
     <nav className={`z-10 w-full ${isScrolling ? "bg-white fixed" : "sticky"}`}>
+      {cart.showCart && <CartSidebar />}
       <div className="flex items-center font-medium justify-around">
         <div className="p-5 md:w-auto w-full flex justify-between">
           <h1 className="font-pacifico text-4xl cursor-pointer pb-4">Furnix</h1>

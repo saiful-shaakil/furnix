@@ -24,11 +24,11 @@ import { useEffect } from "react";
 import { calculateTotalInCart } from "../src/redux/features/cart/cartSlice";
 
 function Home() {
-  const { showCart } = useSelector((state) => state.cart);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(calculateTotalInCart());
-  }, [dispatch]);
+  // const { showCart, cartItems } = useSelector((state) => state.cart);
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   dispatch(calculateTotalInCart());
+  // }, [dispatch, cartItems]);
   return (
     <>
       <Head>
@@ -36,7 +36,6 @@ function Home() {
         <meta property="description" content="Homepage" />
       </Head>
       <main>
-        {showCart && <CartSidebar />}
         {/* First section of home page */}
         <section
           style={{
