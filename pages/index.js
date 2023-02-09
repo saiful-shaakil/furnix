@@ -18,11 +18,17 @@ import ottomanchairbanner from "../src/assets/banner2.webp";
 import BannerCard from "../src/components/BannerCard";
 import Products from "../src/sections/OurProducts/products";
 import Navbar from "../src/components/Navbar/Navbar";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import CartSidebar from "../src/components/Cart";
+import { useEffect } from "react";
+import { calculateTotalInCart } from "../src/redux/features/cart/cartSlice";
 
 function Home() {
   const { showCart } = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(calculateTotalInCart());
+  }, [dispatch]);
   return (
     <>
       <Head>

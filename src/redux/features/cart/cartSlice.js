@@ -16,38 +16,52 @@ const cartSlice = createSlice({
       state.total = 0;
     },
     addItemToCart: (state, action) => {
-      // console.log(action.payload);
-      const oldProduct = state.cartItems.filter(
+      const selectedProduct = state.cartItems.find(
         (item) => item.id === action.payload.id
       );
-      // console.log(oldProduct);
-      if (oldProduct.length === 0) {
+      if (selectedProduct) {
+        selectedProduct.amount = selectedProduct.amount + 1;
+      } else {
         const product = { ...action.payload, amount: 1 };
         state.cartItems.push(product);
-        state.totalProduct = state.totalProduct + 1;
-      } else {
-        const filteredCart = state.cartItems.filter(
-          (item) => item.id !== action.payload.id
-        );
-        console.log(current(filteredCart));
-        // const { amount } = oldProduct[0];
-        // const newAmount = amount + 1;
-        // const product = { ...action.payload, amount: newAmount };
-        // const newCart = [...filteredCart, product];
-        // state.cartItems = newCart;
-        // state.totalProduct = state.totalProduct + 1;
       }
-      console.log(current(state.cartItems));
+      // console.log(current(state.cartItems));
     },
-    removeItemFromCart: (state, action) => {},
+    removeItemFromCart: (state, action) => {
+      const newCart = state.cartItems.filter(
+        (product) => product.id !== action.payload
+      );
+      state.cartItems = [...newCart];
+    },
     increaseItemInCart: (state, action) => {
-      const clickedProduct = state.cartItems.filter(
-        (product) => (product.id = action.payload)
+      const clickedProduct = state.cartItems.find(
+        (product) => product.id === action.payload
       );
       clickedProduct.amount = clickedProduct.amount + 1;
     },
-    decreaseItemInCart: (state, action) => {},
-    calculateTotalInCart: (state) => {},
+    decreaseItemInCart: (state, action) => {
+      const clickedProduct = state.cartItems.find(
+        (product) => product.id === action.payload
+      );
+      if (clickedProduct.amount > 0) {
+        clickedProduct.amount = clickedProduct.amount - 1;
+      } else {
+        const newCart = state.cartItems.filter(
+          (product) => product.id !== action.payload
+        );
+        state.cartItems = [...newCart];
+      }
+    },
+    calculateTotalInCart: (state) => {
+      let totalProduct = 0;
+      let totalPrice = 0;
+      state.cartItems.forEach((item) => {
+        totalPrice += item.amount * item.money;
+        totalProduct += item.amount;
+      });
+      state.totalPrice = totalPrice;
+      state.totalProduct = totalProduct;
+    },
     showCart: (state, action) => {
       state.showCart = action.payload;
     },

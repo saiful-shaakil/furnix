@@ -1,5 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
-import { increaseItemInCart, showCart } from "../redux/features/cart/cartSlice";
+import {
+  decreaseItemInCart,
+  increaseItemInCart,
+  removeItemFromCart,
+  showCart,
+} from "../redux/features/cart/cartSlice";
 
 export default function CartSidebar() {
   const { cartItems } = useSelector((state) => state.cart);
@@ -15,7 +20,11 @@ export default function CartSidebar() {
   };
   // to decrease the amount of item.
   const decreaseQuantity = (id) => {
-    dispatch(decreaseQuantity(id));
+    dispatch(decreaseItemInCart(id));
+  };
+  // to remove the product from the cart
+  const removeProduct = (id) => {
+    dispatch(removeItemFromCart(id));
   };
   return (
     <div
@@ -104,7 +113,7 @@ export default function CartSidebar() {
                                       </button>
                                       <input
                                         className="text-black  text-center w-12 mx-2"
-                                        defaultValue={item.amount}
+                                        value={item.amount}
                                         type="text"
                                         id="quantityValue"
                                       />
@@ -122,6 +131,7 @@ export default function CartSidebar() {
 
                                 <div className="flex">
                                   <button
+                                    onClick={() => removeProduct(item.id)}
                                     type="button"
                                     className="font-medium text-indigo-600 hover:text-indigo-500"
                                   >
