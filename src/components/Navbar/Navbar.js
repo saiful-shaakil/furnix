@@ -12,6 +12,7 @@ import {
 import CartSidebar from "../Cart";
 import Login from "../Authentication/Login";
 import { displayLogin } from "../../redux/features/auth/authSlice";
+import Register from "../Authentication/Register";
 const Navbar = () => {
   const { cart, auth } = useSelector((state) => state);
   const [open, setOpen] = useState(false);
@@ -46,6 +47,8 @@ const Navbar = () => {
     <nav className={`z-10 w-full ${isScrolling ? "bg-white fixed" : "sticky"}`}>
       {cart.showCart && <CartSidebar />}
       {auth.displayLoginPage && <Login />}
+      {auth.displayRegisterPage && <Register />}
+
       <div className="flex items-center font-medium justify-around">
         <div className="p-5 md:w-auto w-full flex justify-between">
           <h1 className="font-pacifico text-4xl cursor-pointer pb-4">Furnix</h1>
