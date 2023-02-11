@@ -48,7 +48,7 @@ export default function CartSidebar() {
                       className="text-lg font-medium text-gray-900"
                       id="slide-over-title"
                     >
-                      Shopping Cart
+                      Shopping Cart &nbsp;{`[${totalProduct} Items]`}
                     </h2>
                     <div className="ml-3 flex h-7 items-center">
                       <button

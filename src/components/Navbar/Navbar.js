@@ -10,8 +10,10 @@ import {
   showCart,
 } from "../../redux/features/cart/cartSlice";
 import CartSidebar from "../Cart";
+import Login from "../Authentication/Login";
+import { displayLogin } from "../../redux/features/auth/authSlice";
 const Navbar = () => {
-  const cart = useSelector((state) => state.cart);
+  const { cart, auth } = useSelector((state) => state);
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
   const [isScrolling, setIsScrolling] = useState(false);
@@ -36,9 +38,14 @@ const Navbar = () => {
   const displayCart = () => {
     dispatch(showCart(true));
   };
+  // to show login page
+  const showLoginPage = () => {
+    dispatch(displayLogin(true));
+  };
   return (
     <nav className={`z-10 w-full ${isScrolling ? "bg-white fixed" : "sticky"}`}>
       {cart.showCart && <CartSidebar />}
+      {auth.displayLoginPage && <Login />}
       <div className="flex items-center font-medium justify-around">
         <div className="p-5 md:w-auto w-full flex justify-between">
           <h1 className="font-pacifico text-4xl cursor-pointer pb-4">Furnix</h1>
@@ -55,7 +62,10 @@ const Navbar = () => {
         </ul>
         <div className="md:flex justify-end text-3xl gap-5 hidden">
           <AiOutlineSearch className="cursor-pointer" />
-          <MdManageAccounts className="cursor-pointer" />
+          <MdManageAccounts
+            onClick={() => showLoginPage()}
+            className="cursor-pointer"
+          />
           <div className="relative">
             <span className="cursor-pointer" onClick={() => displayCart()}>
               <span
