@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
 import NavLinks from "./NavLinks";
 import { AiOutlineMenu, AiOutlineSearch } from "react-icons/ai";
 import { MdManageAccounts } from "react-icons/md";
 import { BiCart } from "react-icons/bi";
 import { HiOutlineXMark } from "react-icons/hi2";
 import { useDispatch, useSelector } from "react-redux";
+import { useRouter } from "next/router";
 import {
   calculateTotalInCart,
   showCart,
@@ -16,9 +18,10 @@ import Register from "../Authentication/Register";
 const Navbar = () => {
   const { cart, auth } = useSelector((state) => state);
   const [open, setOpen] = useState(false);
+  const { data: session } = useSession();
   const dispatch = useDispatch();
   const [isScrolling, setIsScrolling] = useState(false);
-
+  const router = useRouter();
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 0) {
@@ -41,11 +44,16 @@ const Navbar = () => {
   };
   // to show login page
   const showLoginPage = () => {
-    dispatch(displayLogin(true));
+    if (session) {
+      router.push("/my-account");
+    } else {
+      dispatch(displayLogin(true));
+    }
   };
   return (
     <nav className={`z-10 w-full ${isScrolling ? "bg-white fixed" : "sticky"}`}>
       {cart.showCart && <CartSidebar />}
+      {/* to handle login and register using redux */}
       {auth.displayLoginPage && <Login />}
       {auth.displayRegisterPage && <Register />}
 

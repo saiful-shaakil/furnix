@@ -1,11 +1,12 @@
 import Image from "next/image";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { signIn } from "next-auth/react";
 import {
   displayLogin,
   displayRegister,
 } from "../../redux/features/auth/authSlice";
 import loginbg from "../../assets/loginbg.jpg";
-import { providers, signIn, getSession, csrfToken } from "next-auth/client";
+// import { providers, signIn, getSession, csrfToken } from "next-auth/client";
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -17,6 +18,10 @@ export default function Login() {
   const showRegisterPage = () => {
     dispatch(displayLogin(false));
     dispatch(displayRegister(true));
+  };
+  // to sign in using google
+  const signInUsingGoogle = () => {
+    signIn("google", { callbackUrl: "http://localhost:3000/my-account" });
   };
   return (
     <div className="flex flex-col md:flex-row absolute top-0 z-30 justify-center items-center w-full h-[100vh] bg-gray-700 bg-opacity-50">
@@ -45,6 +50,7 @@ export default function Login() {
           </p>
           <div className="my-6 space-y-4">
             <button
+              onClick={() => signInUsingGoogle()}
               aria-label="Login with Google"
               type="button"
               className="flex items-center justify-center w-full p-4 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1 dark:border-gray-400 focus:ring-violet-400"
@@ -128,12 +134,4 @@ export default function Login() {
       </div>
     </div>
   );
-}
-
-export async function getServerSideProps(context) {
-  return {
-    props: {
-      providers: await providers(context),
-    },
-  };
 }

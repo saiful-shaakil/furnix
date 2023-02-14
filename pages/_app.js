@@ -5,6 +5,7 @@ import Navbar from "../src/components/Navbar/Navbar";
 import { useRouter } from "next/router";
 import { Provider } from "react-redux";
 import { wrapper } from "../src/redux/app/store";
+import { SessionProvider } from "next-auth/react";
 
 const pacifico = Pacifico({
   subsets: ["latin"],
@@ -16,7 +17,7 @@ const rubik = Rubik({
   variable: "--font-rubik",
   weight: ["400"],
 });
-
+// Component, pageProps: { session, ...pageProps }
 function MyApp({ Component, ...rest }) {
   const { store, props } = wrapper.useWrappedStore(rest);
   const { pageProps } = props;
@@ -25,20 +26,24 @@ function MyApp({ Component, ...rest }) {
   if (pathname == "/") {
     return (
       <Provider store={store}>
-        <main className={`${pacifico.variable} ${rubik.variable} font-rubik`}>
-          <Component {...pageProps} />
-          <Footer />
-        </main>
+        <SessionProvider session={rest.session}>
+          <main className={`${pacifico.variable} ${rubik.variable} font-rubik`}>
+            <Component {...pageProps} />
+            <Footer />
+          </main>
+        </SessionProvider>
       </Provider>
     );
   } else {
     return (
       <Provider store={store}>
-        <main className={`${pacifico.variable} ${rubik.variable} font-rubik`}>
-          <Navbar />
-          <Component {...pageProps} />
-          <Footer />
-        </main>
+        <SessionProvider session={rest.session}>
+          <main className={`${pacifico.variable} ${rubik.variable} font-rubik`}>
+            <Navbar />
+            <Component {...pageProps} />
+            <Footer />
+          </main>
+        </SessionProvider>
       </Provider>
     );
   }
