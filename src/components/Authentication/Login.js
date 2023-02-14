@@ -5,6 +5,7 @@ import {
   displayRegister,
 } from "../../redux/features/auth/authSlice";
 import loginbg from "../../assets/loginbg.jpg";
+import { providers, signIn, getSession, csrfToken } from "next-auth/client";
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -127,4 +128,12 @@ export default function Login() {
       </div>
     </div>
   );
+}
+
+export async function getServerSideProps(context) {
+  return {
+    props: {
+      providers: await providers(context),
+    },
+  };
 }
