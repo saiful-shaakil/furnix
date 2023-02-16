@@ -43,7 +43,7 @@ const cartSlice = createSlice({
       const clickedProduct = state.cartItems.find(
         (product) => product.id === action.payload
       );
-      if (clickedProduct.amount > 0) {
+      if (clickedProduct.amount > 1) {
         clickedProduct.amount = clickedProduct.amount - 1;
       } else {
         const newCart = state.cartItems.filter(
