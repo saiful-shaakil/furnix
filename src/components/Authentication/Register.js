@@ -5,6 +5,8 @@ import {
   displayRegister,
 } from "../../redux/features/auth/authSlice";
 import registerbg from "../../assets/registerbh.jpg";
+import { useFormik } from "formik";
+import { registerValidate } from "../../utils/formValidation";
 
 export default function Register() {
   const dispatch = useDispatch();
@@ -17,6 +19,22 @@ export default function Register() {
     dispatch(displayLogin(true));
     dispatch(displayRegister(false));
   };
+  //
+  // to get the data from the form using formik
+  const onSubmit = (values) => {
+    console.log(values);
+  };
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      mobile: "",
+      email: "",
+      password: "",
+      cpassword: "",
+    },
+    validate: registerValidate,
+    onSubmit,
+  });
   return (
     <div className="flex flex-col md:flex-row absolute top-0 z-30 justify-center items-center w-full h-[100vh] bg-gray-700 bg-opacity-50">
       <div className="flex-[0.6] bg-white h-[93vh] hidden  md:flex justify-center items-center">
@@ -47,7 +65,7 @@ export default function Register() {
             </button>
           </p>
           <form
-            action=""
+            onSubmit={formik.handleSubmit}
             className="space-y-8 ng-untouched ng-pristine ng-valid mt-5"
           >
             <div className="space-y-4">
@@ -60,9 +78,11 @@ export default function Register() {
                   name="name"
                   id="name"
                   placeholder="John Smith"
-                  className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
+                  {...formik.getFieldProps("name")}
+                  className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 text-black focus:dark:border-violet-400"
                 />
               </div>
+
               <div className="space-y-2">
                 <label htmlFor="mobile" className="block text-sm">
                   Mobile
@@ -71,10 +91,17 @@ export default function Register() {
                   type="text"
                   name="mobile"
                   id="mobile"
+                  {...formik.getFieldProps("mobile")}
                   placeholder="+8801"
-                  className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
+                  className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 text-black focus:dark:border-violet-400"
                 />
               </div>
+              {formik.errors.mobile && (
+                <span className="text-rose-500">{formik.errors.mobile}</span>
+              )}
+              {!formik.errors.mobile && formik.values.mobile && (
+                <span className="text-green-500">Perfect!</span>
+              )}
               <div className="space-y-2">
                 <label htmlFor="email" className="block text-sm">
                   Email address
@@ -83,10 +110,17 @@ export default function Register() {
                   type="email"
                   name="email"
                   id="email"
+                  {...formik.getFieldProps("email")}
                   placeholder="leroy@jenkins.com"
-                  className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
+                  className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 text-black focus:dark:border-violet-400"
                 />
               </div>
+              {formik.errors.email && (
+                <span className="text-rose-500">{formik.errors.email}</span>
+              )}
+              {!formik.errors.email && formik.values.email && (
+                <span className="text-green-500">Perfect!</span>
+              )}
               <div className="space-y-2">
                 <div className="flex justify-between">
                   <label htmlFor="password" className="text-sm">
@@ -97,10 +131,17 @@ export default function Register() {
                   type="password"
                   name="password"
                   id="password"
+                  {...formik.getFieldProps("password")}
                   placeholder="*****"
-                  className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
+                  className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 text-black focus:dark:border-violet-400"
                 />
               </div>
+              {formik.errors.password && (
+                <span className="text-rose-500">{formik.errors.password}</span>
+              )}
+              {!formik.errors.password && formik.values.password && (
+                <span className="text-green-500">Perfect!</span>
+              )}
               {/* conf pass */}
               <div className="space-y-2">
                 <div className="flex justify-between">
@@ -112,13 +153,20 @@ export default function Register() {
                   type="confpassword"
                   name="confpassword"
                   id="confpassword"
+                  {...formik.getFieldProps("cpassword")}
                   placeholder="*****"
-                  className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
+                  className=" w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 text-black focus:dark:border-violet-400"
                 />
               </div>
+              {formik.errors.cpassword && (
+                <span className="text-rose-500">{formik.errors.cpassword}</span>
+              )}
+              {!formik.errors.cpassword && formik.values.cpassword && (
+                <span className="text-green-500">Perfect!</span>
+              )}
             </div>
             <button
-              type="button"
+              type="submit"
               className="w-full px-8 py-3 font-semibold rounded-md bg-gray-600"
             >
               Sign Up

@@ -6,6 +6,8 @@ import {
   displayRegister,
 } from "../../redux/features/auth/authSlice";
 import loginbg from "../../assets/loginbg.jpg";
+import { useFormik } from "formik";
+import { loginValidate } from "../../utils/formValidation";
 // import { providers, signIn, getSession, csrfToken } from "next-auth/client";
 
 export default function Login() {
@@ -19,6 +21,19 @@ export default function Login() {
     dispatch(displayLogin(false));
     dispatch(displayRegister(true));
   };
+
+  // to get the data from the form using formik
+  const onSubmit = (values) => {
+    console.log(values);
+  };
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validate: loginValidate,
+    onSubmit,
+  });
   // to sign in using google
   const signInUsingGoogle = () => {
     signIn("google", { callbackUrl: "http://localhost:3000/my-account" });
@@ -85,7 +100,7 @@ export default function Login() {
             <hr className="w-full dark:text-gray-400" />
           </div>
           <form
-            action=""
+            onSubmit={formik.handleSubmit}
             className="space-y-8 ng-untouched ng-pristine ng-valid"
           >
             <div className="space-y-4">
@@ -97,10 +112,18 @@ export default function Login() {
                   type="email"
                   name="email"
                   id="email"
-                  placeholder="leroy@jenkins.com"
-                  className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
+                  placeholder="user@furnix.com"
+                  onChange={formik.handleChange}
+                  value={formik.values.email}
+                  className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 text-black  focus:dark:border-violet-400"
                 />
               </div>
+              {formik.errors.email && (
+                <span className="text-rose-500">{formik.errors.email}</span>
+              )}
+              {!formik.errors.email && formik.values.email && (
+                <span className="text-green-500">Perfect!</span>
+              )}
               <div className="space-y-2">
                 <div className="flex justify-between">
                   <label htmlFor="password" className="text-sm">
@@ -118,13 +141,21 @@ export default function Login() {
                   type="password"
                   name="password"
                   id="password"
+                  onChange={formik.handleChange}
+                  value={formik.values.password}
                   placeholder="*****"
-                  className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
+                  className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 text-black focus:dark:border-violet-400"
                 />
               </div>
+              {formik.errors.password && (
+                <span className="text-rose-500">{formik.errors.password}</span>
+              )}
+              {!formik.errors.password && formik.values.password && (
+                <span className="text-green-500">Perfect!</span>
+              )}
             </div>
             <button
-              type="button"
+              type="submit"
               className="w-full px-8 py-3 font-semibold rounded-md bg-gray-600"
             >
               Sign in
