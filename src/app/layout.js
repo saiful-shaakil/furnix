@@ -1,5 +1,10 @@
+"use client";
+import { usePathname } from "next/navigation";
 import "../styles/globals.css";
 import { Pacifico, Rubik } from "next/font/google";
+import Navbar from "@/components/Shared/Navbar/Navbar";
+import AuthProvider from "@/utils/authProvider/AuthProvider";
+import StoreProvider from "@/utils/storeProvider/StoreProver";
 
 const pacifico = Pacifico({
   subsets: ["latin"],
@@ -18,11 +23,27 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  const pathname = usePathname();
   return (
-    <html lang="en">
-      <body className={`${pacifico.variable} ${rubik.variable}`}>
-        {children}
-      </body>
-    </html>
+    <AuthProvider>
+      <html lang="en">
+        <body className={`${pacifico.variable} ${rubik.variable}`}>
+          {pathname === "/" ? (
+            <>
+              <StoreProvider>
+                <main>{children}</main>
+              </StoreProvider>
+            </>
+          ) : (
+            <>
+              <StoreProvider>
+                <Navbar />
+                <main>{children}</main>
+              </StoreProvider>
+            </>
+          )}
+        </body>
+      </html>
+    </AuthProvider>
   );
 }

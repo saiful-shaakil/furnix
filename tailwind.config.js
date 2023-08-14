@@ -15,6 +15,13 @@ module.exports = {
     colors: {
       primary: "#3e976b",
       secondary: "#bdefd7",
+      black: "#000000",
+      seafoam: "#3DED97",
+      desire: "#EA3B52",
+      crimson: "#BA11OC",
+      navy: "#0096FF",
+      white: "#ffff",
+      red: "#FF0000",
     },
   },
   plugins: [],
