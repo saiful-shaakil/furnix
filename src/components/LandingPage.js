@@ -1,11 +1,22 @@
 "use client";
-import React from "react";
-import Navbar from "./Shared/Navbar/Navbar";
+import React, { useState } from "react";
+import Navbar from "./Navbar/Navbar";
 import BannerCard from "./BannerCard";
 import ottomanchairbanner from "../../public/assets/banner2.webp";
 import Image from "next/image";
 
 export default function LandingPage() {
+  const [productsState, setProductState] = useState("All Products");
+  let contents;
+  if (productsState === "All Products") {
+    // contents = <AllProducts />;
+  }
+  if (productsState === "New Arrivals") {
+    // contents = <NewArrivals />;
+  }
+  if (productsState === "Best Sellers") {
+    // contents = <BestSellers />;
+  }
   return (
     <>
       {/* First Section */}
@@ -31,7 +42,7 @@ export default function LandingPage() {
           </button>
         </div>
       </section>
-      {/* third section */}
+      {/* second section */}
       <section className="w-[80%] relative m-auto flex flex-col lg:flex-row gap-5 my-10">
         <div className="flex-[0.5] gap-12 flex flex-col">
           <div className="h-[570px] ">
@@ -71,6 +82,39 @@ export default function LandingPage() {
             image="https://i.ibb.co/fxmf4k1/dinningchair.webp"
             type="b"
           />
+        </div>
+      </section>
+      {/* thired section: products */}
+      <section className="common-width my-20">
+        <h1 className="text-center text-5xl">Our Products</h1>
+        <div>
+          <div className="flex justify-center items-center gap-5 my-10 text-sm md:text-2xl">
+            <option
+              className={`cursor-pointer ${
+                productsState === "All Products" && "text-primary"
+              }`}
+              onClick={(e) => setProductState(e.target.value)}
+            >
+              All Products
+            </option>
+            <option
+              className={`cursor-pointer ${
+                productsState === "Best Sellers" && "text-primary"
+              }`}
+              onClick={(e) => setProductState(e.target.value)}
+            >
+              Best Sellers
+            </option>
+            <option
+              className={`cursor-pointer ${
+                productsState === "New Arrivals" && "text-primary"
+              }`}
+              onClick={(e) => setProductState(e.target.value)}
+            >
+              New Arrivals
+            </option>
+          </div>
+          {contents}
         </div>
       </section>
     </>

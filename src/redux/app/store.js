@@ -1,13 +1,16 @@
 "use client";
-const { combineReducers, configureStore } = require("@reduxjs/toolkit");
+const { configureStore } = require("@reduxjs/toolkit");
 import authReducer from "../features/auth/authSlice";
 import cartReducer from "../features/cart/cartSlice";
-
-const rootReducer = combineReducers({
-  cart: cartReducer,
-  auth: authReducer,
-});
+import { apiSlice } from "../features/api/apiSlice";
 
 export const store = configureStore({
-  reducer: rootReducer,
+  reducer: {
+    [apiSlice.reducerPath]: apiSlice.reducer,
+    cart: cartReducer,
+    auth: authReducer,
+  },
+  devTools: process.env.NODE_ENV !== "production",
+  middleware: (getDefaultMiddlewares) =>
+    getDefaultMiddlewares().concat(apiSlice.middleware),
 });

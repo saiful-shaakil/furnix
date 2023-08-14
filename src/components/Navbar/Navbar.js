@@ -14,6 +14,7 @@ import {
 import { displayLogin } from "@/redux/features/auth/authSlice";
 import Login from "@/components/Authentication/Login";
 import Register from "@/components/Authentication/Register";
+import CartSidebar from "../Cart";
 const Navbar = () => {
   const { cart, auth } = useSelector((state) => state);
   const [open, setOpen] = useState(false);
@@ -51,6 +52,7 @@ const Navbar = () => {
   };
   return (
     <nav className={`z-10 w-full ${isScrolling ? "bg-white fixed" : "sticky"}`}>
+      {cart.showCart && <CartSidebar />}
       {/* to handle login and register using redux */}
       {auth?.displayLoginPage && <Login />}
       {auth?.displayRegisterPage && <Register />}

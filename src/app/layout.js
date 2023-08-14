@@ -2,10 +2,10 @@
 import { usePathname } from "next/navigation";
 import "../styles/globals.css";
 import { Pacifico, Rubik } from "next/font/google";
-import Navbar from "@/components/Shared/Navbar/Navbar";
+import Navbar from "@/components/Navbar/Navbar";
 import AuthProvider from "@/utils/authProvider/AuthProvider";
 import StoreProvider from "@/utils/storeProvider/StoreProver";
-import Footer from "@/components/Shared/Footer";
+import Footer from "@/components/Footer";
 
 const pacifico = Pacifico({
   subsets: ["latin"],
