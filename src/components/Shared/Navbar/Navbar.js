@@ -7,9 +7,15 @@ import { HiOutlineXMark } from "react-icons/hi2";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 import NavLinks from "./Navlinks";
-import { calculateTotalInCart } from "@/redux/features/cart/cartSlice";
+import {
+  calculateTotalInCart,
+  showCart,
+} from "@/redux/features/cart/cartSlice";
+import { displayLogin } from "@/redux/features/auth/authSlice";
+import Login from "@/components/Authentication/Login";
+import Register from "@/components/Authentication/Register";
 const Navbar = () => {
-  const { cart } = useSelector((state) => state);
+  const { cart, auth } = useSelector((state) => state);
   const [open, setOpen] = useState(false);
   const { data: session } = useSession();
   const dispatch = useDispatch();
@@ -45,6 +51,9 @@ const Navbar = () => {
   };
   return (
     <nav className={`z-10 w-full ${isScrolling ? "bg-white fixed" : "sticky"}`}>
+      {/* to handle login and register using redux */}
+      {auth?.displayLoginPage && <Login />}
+      {auth?.displayRegisterPage && <Register />}
       <div className="flex items-center font-medium justify-around">
         <div className="p-5 md:w-auto w-full flex justify-between">
           <h1 className="font-pacifico text-4xl cursor-pointer pb-4">Furnix</h1>
