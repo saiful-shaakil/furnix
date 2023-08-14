@@ -5,6 +5,7 @@ import { Pacifico, Rubik } from "next/font/google";
 import Navbar from "@/components/Shared/Navbar/Navbar";
 import AuthProvider from "@/utils/authProvider/AuthProvider";
 import StoreProvider from "@/utils/storeProvider/StoreProver";
+import Footer from "@/components/Shared/Footer";
 
 const pacifico = Pacifico({
   subsets: ["latin"],
@@ -32,6 +33,7 @@ export default function RootLayout({ children }) {
             <>
               <StoreProvider>
                 <main>{children}</main>
+                <Footer />
               </StoreProvider>
             </>
           ) : (
@@ -39,6 +41,7 @@ export default function RootLayout({ children }) {
               <StoreProvider>
                 <Navbar />
                 <main>{children}</main>
+                <Footer />
               </StoreProvider>
             </>
           )}
