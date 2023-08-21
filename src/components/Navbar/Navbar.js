@@ -16,7 +16,8 @@ import Login from "@/components/Authentication/Login";
 import Register from "@/components/Authentication/Register";
 import CartSidebar from "../Cart";
 const Navbar = () => {
-  const { cart, auth } = useSelector((state) => state);
+  const auth = useSelector((state) => state.auth);
+  const cart = useSelector((state) => state.cart);
   const [open, setOpen] = useState(false);
   const { data: session } = useSession();
   const dispatch = useDispatch();
@@ -52,7 +53,7 @@ const Navbar = () => {
   };
   return (
     <nav className={`z-10 w-full ${isScrolling ? "bg-white fixed" : "sticky"}`}>
-      {cart.showCart && <CartSidebar />}
+      {cart?.showCart && <CartSidebar />}
       {/* to handle login and register using redux */}
       {auth?.displayLoginPage && <Login />}
       {auth?.displayRegisterPage && <Register />}
@@ -80,10 +81,10 @@ const Navbar = () => {
             <span className="cursor-pointer" onClick={() => displayCart()}>
               <span
                 className={`absolute text-[18px] -mt-5 ${
-                  cart.totalProduct < 10 ? "right-2" : "right-1"
+                  cart?.totalProduct < 10 ? "right-2" : "right-1"
                 }`}
               >
-                {cart.totalProduct}
+                {cart?.totalProduct}
               </span>
               <BiCart className="cursor-pointer" />
             </span>

@@ -29,7 +29,7 @@ const NavLinks = () => {
                   <span className="text-xl md:hidden inline">
                     <AiOutlineDown></AiOutlineDown>
                   </span>
-                  <span className="text-xl md:mt-1 md:ml-2  md:block hidden group-hover:rotate-180 group-hover:-mt-2">
+                  <span className="text-xl md:mt-1 md:ml-2  md:block hidden group-hover:rotate-180 mt-2 group-hover:-mt-2">
                     <AiOutlineDown></AiOutlineDown>
                   </span>
                 </>

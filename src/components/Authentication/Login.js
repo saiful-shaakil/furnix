@@ -37,20 +37,24 @@ export default function Login() {
   return (
     <div className="flex flex-col md:flex-row absolute top-0 z-30 justify-center items-center w-full h-[100vh] bg-gray-700 bg-opacity-50">
       <div className="flex-[0.6] bg-white h-[93vh] hidden  md:flex justify-center items-center">
-        <Image src={loginbg} className="h-fit w-full" alt="Login background" />
+        <Image
+          src={loginbg}
+          className="h-fit w-full object-contain"
+          alt="Login background"
+        />
       </div>
-      <div className="relative">
+      <div className="relative overflow-auto">
         {" "}
-        <button
-          onClick={() => hideLoginPage()}
-          className="text-white text-5xl
-       -top-0 absolute -right-12 border-2 px-2 border-black bg-gray-600"
-        >
-          ×
-        </button>
         {/* login side */}
         <div className="h-[93vh] w-full max-w-md p-4 flex-[0.4] shadow sm:p-8 bg-gray-900 text-white">
-          <h2 className="mb-3 text-3xl font-semibold text-center">
+          <button
+            onClick={() => hideLoginPage()}
+            className="text-white text-3xl
+       top-0 absolute right-0 border-2 px-2 border-black bg-gray-600"
+          >
+            ×
+          </button>
+          <h2 className="mb-3 mt-4 md:mt-0 text-3xl font-semibold text-center">
             Login to your account
           </h2>
           <p className="text-sm text-center dark:text-gray-400">

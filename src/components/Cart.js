@@ -113,13 +113,15 @@ export default function CartSidebar() {
                               className="-my-6 divide-y divide-gray-200"
                             >
                               {cartItems?.map((item) => (
-                                <li key={item.id} className="flex py-6">
+                                <li key={item._id} className="flex py-6">
                                   <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                                    <img
-                                      src={`${item.img[0]}`}
-                                      alt=""
-                                      className="h-full w-full object-cover object-center"
-                                    />
+                                    <picture>
+                                      <img
+                                        src={`${item.img[0]}`}
+                                        alt=""
+                                        className="h-full w-full object-cover object-center"
+                                      />
+                                    </picture>
                                   </div>
 
                                   <div className="ml-4 flex flex-1 flex-col">
@@ -137,7 +139,7 @@ export default function CartSidebar() {
                                           <div className="border rounded-lg px-2 py-1">
                                             <button
                                               onClick={() =>
-                                                decreaseQuantity(item.id)
+                                                decreaseQuantity(item._id)
                                               }
                                               className="text-xl text-primary"
                                             >
@@ -146,12 +148,13 @@ export default function CartSidebar() {
                                             <input
                                               className="text-black  text-center w-12 mx-2"
                                               value={item.amount}
+                                              readOnly
                                               type="text"
                                               id="quantityValue"
                                             />
                                             <button
                                               onClick={() =>
-                                                increaseQuantity(item.id)
+                                                increaseQuantity(item._id)
                                               }
                                               className="text-xl text-success"
                                             >
@@ -163,7 +166,9 @@ export default function CartSidebar() {
 
                                       <div className="flex">
                                         <button
-                                          onClick={() => removeProduct(item.id)}
+                                          onClick={() =>
+                                            removeProduct(item._id)
+                                          }
                                           type="button"
                                           className="font-medium text-indigo-600 hover:text-indigo-500"
                                         >

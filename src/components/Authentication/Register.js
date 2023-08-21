@@ -4,8 +4,11 @@ import registerbg from "../../../public/assets/registerbh.jpg";
 import { useFormik } from "formik";
 import { displayLogin, displayRegister } from "@/redux/features/auth/authSlice";
 import { registerValidate } from "@/utils/validator/formValidator";
+import { useState } from "react";
 
 export default function Register() {
+  const [disable, setDisable] = useState(false); // to prevent double click of signup button.
+  const [message, setMessage] = useState(""); // to show error message;
   const dispatch = useDispatch();
   //   to hide register page
   const hideRegisterPage = () => {
@@ -18,8 +21,28 @@ export default function Register() {
   };
   //
   // to get the data from the form using formik
-  const onSubmit = (values) => {
-    console.log(values);
+  const onSubmit = async (values) => {
+    setMessage("");
+    setDisable(true);
+    const res = await fetch("/api/auth/signup", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        "Access-Control-Allow-Origin": "http://localhost:3000/",
+      },
+      body: JSON.stringify({
+        name: values.name,
+        email: values.email,
+        password: values.password,
+      }),
+    });
+    const result = await res?.json();
+    setDisable(false);
+    if (result.success) {
+      dispatch(displayRegister(false));
+      dispatch(displayLogin(true));
+    }
+    setMessage(result.message);
   };
   const formik = useFormik({
     initialValues: {
@@ -36,22 +59,22 @@ export default function Register() {
       <div className="flex-[0.6] bg-white h-[93vh] hidden  md:flex justify-center items-center">
         <Image
           src={registerbg}
-          className="h-[93vh] w-full"
+          className="h-[93vh] w-full object-contain"
           alt="Login background"
         />
       </div>
       <div className="relative">
         {" "}
-        <button
-          onClick={() => hideRegisterPage()}
-          className="text-white text-5xl
-       -top-0 absolute -right-12 border-2 px-2 border-black bg-gray-600"
-        >
-          ×
-        </button>
         {/* login side */}
-        <div className="h-[93vh] w-full max-w-md p-4 flex-[0.4] shadow sm:p-8 bg-gray-900 text-white">
-          <h2 className="mb-3 text-3xl font-semibold text-center">
+        <div className="h-[93vh] overflow-auto w-full max-w-md p-4 flex-[0.4] shadow sm:p-8 bg-gray-900 text-white">
+          <button
+            onClick={() => hideRegisterPage()}
+            className="text-white text-3xl
+       top-0 absolute right-0 border-2 px-2 border-black bg-gray-600"
+          >
+            ×
+          </button>
+          <h2 className="mb-3 mt-4 md:mt-0 text-3xl font-semibold text-center">
             Create a new account
           </h2>
           <p className="text-sm text-center dark:text-gray-400">
@@ -141,6 +164,7 @@ export default function Register() {
                 <span className="text-green-500">Perfect!</span>
               )}
             </div>
+            {message && <span className="text-red">{message}</span>}
             <button
               type="submit"
               className="w-full px-8 py-3 font-semibold rounded-md bg-gray-600"

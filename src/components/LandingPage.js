@@ -4,18 +4,21 @@ import Navbar from "./Navbar/Navbar";
 import BannerCard from "./BannerCard";
 import ottomanchairbanner from "../../public/assets/banner2.webp";
 import Image from "next/image";
+import AllProducts from "./Products/AllProducts";
+import NewArrivals from "./Products/NewArrivals";
+import BestSellers from "./Products/BestSellers";
 
 export default function LandingPage() {
   const [productsState, setProductState] = useState("All Products");
   let contents;
   if (productsState === "All Products") {
-    // contents = <AllProducts />;
+    contents = <AllProducts />;
   }
   if (productsState === "New Arrivals") {
-    // contents = <NewArrivals />;
+    contents = <NewArrivals />;
   }
   if (productsState === "Best Sellers") {
-    // contents = <BestSellers />;
+    contents = <BestSellers />;
   }
   return (
     <>
@@ -85,7 +88,7 @@ export default function LandingPage() {
         </div>
       </section>
       {/* thired section: products */}
-      <section className="common-width my-20">
+      {/* <section className="common-width my-20">
         <h1 className="text-center text-5xl">Our Products</h1>
         <div>
           <div className="flex justify-center items-center gap-5 my-10 text-sm md:text-2xl">
@@ -116,7 +119,7 @@ export default function LandingPage() {
           </div>
           {contents}
         </div>
-      </section>
+      </section> */}
     </>
   );
 }
